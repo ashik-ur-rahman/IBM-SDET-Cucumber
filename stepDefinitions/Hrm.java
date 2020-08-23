@@ -23,8 +23,8 @@ import cucumber.api.java.en.Then;
 import cucumber.api.java.en.When;
 
 public class Hrm {
-	WebDriver driver = new FirefoxDriver();
-//	WebDriver driver = new ChromeDriver();
+//	WebDriver driver = new FirefoxDriver();
+	WebDriver driver = new ChromeDriver();
 	WebDriverWait wait = new WebDriverWait(driver,10);
 
 
@@ -53,10 +53,11 @@ public class Hrm {
 
 	@Then("^click on the Add button to navigate to the Add Job Vacancy form$")
 	public void click_on_the_Add_button_to_navigate_to_the_Add_Job_Vacancy_form() throws Throwable {
+		Thread.sleep(2000);
 		driver.findElement(By.id("btnAdd")).click();
 	}
 	
-	String jobVacancy = "02-ADRDEV";
+	String jobVacancy = "08-ADRDEV";
 	String jobtitle = "DevOps Engineer";	
 	String hrngmnger = "Ayush Kumar Gupta";
 	String noofpos = "04";
@@ -69,6 +70,23 @@ public class Hrm {
 		driver.findElement(By.xpath("//input[@id='addJobVacancy_noOfPositions']")).sendKeys(noofpos);
 	}
 
+	
+	@Then("^enter Job Title \"([^\"]*)\",Vacancy Name\"([^\"]*)\",Hiring Manager \"([^\"]*)\",Number of Positions \"([^\"]*)\"$")
+	public void enter_Job_Title_Vacancy_Name_Hiring_Manager_Number_of_Positions(String jbTitle, String vacancy, String hiringManager, String noOfPos) throws Throwable {
+
+			jobVacancy = vacancy;
+			jobtitle = jbTitle;	
+			hrngmnger = hiringManager;
+			noofpos = noOfPos;
+			Select select = new Select(driver.findElement(By.id("addJobVacancy_jobTitle")));
+			select.selectByVisibleText(jobtitle);
+			driver.findElement(By.xpath("//input[@id='addJobVacancy_name']")).sendKeys(jobVacancy);
+			driver.findElement(By.xpath("//input[@id='addJobVacancy_hiringManager']")).sendKeys(hrngmnger);
+			driver.findElement(By.xpath("//input[@id='addJobVacancy_noOfPositions']")).sendKeys(noofpos);
+		
+	}		
+	
+	
 	@Then("^click the Save button to save the vacancy$")
 	public void save_vacancy() throws Throwable {
 		driver.findElement(By.xpath("//form[@id='frmAddJobVacancy']/fieldset/p/input[@id='btnSave']")).click();		
@@ -77,8 +95,6 @@ public class Hrm {
 	@Then("^verify that vacancy is created$")
 	public void verify_vacancy_created() throws Throwable {
 		driver.findElement(By.id("menu_recruitment_viewJobVacancy")).click();
-//		WebElement vacancy = driver.findElement(By.xpath("//*[@id='vacancySearch_jobVacancy']"));
-//		wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath("//*[@id='vacancySearch_jobVacancy']"))).isDisplayed();
 		Thread.sleep(1500);
 		WebElement hiringManager = driver.findElement(By.xpath("//*[@id='vacancySearch_hiringManager']"));
 		WebElement status = driver.findElement(By.id("vacancySearch_status"));
@@ -89,16 +105,17 @@ public class Hrm {
 					WebElement vacancy = driver.findElement(By.xpath("//*[@id='vacancySearch_jobVacancy']"));
 					Select select2 = new Select(vacancy);
 					select2.selectByVisibleText(jobVacancy);
-			     break;
+					Select select3 = new Select(hiringManager);
+					select3.selectByVisibleText(hrngmnger);
+					Select select4 = new Select(status);
+					select4.selectByVisibleText("Active");
+					break;
 			  }
 			  catch(Exception e){
 			     System.out.println(e.getMessage());
 			  }
 			}		
-		Select select3 = new Select(hiringManager);
-		select3.selectByVisibleText(hrngmnger);
-		Select select4 = new Select(status);
-		select4.selectByVisibleText("Active");
+
 		
 		driver.findElement(By.id("btnSrch")).click();
 		
@@ -129,7 +146,7 @@ public class Hrm {
 		driver.findElement(By.id("addCandidate_firstName")).sendKeys(c_firstName);
 		driver.findElement(By.id("addCandidate_middleName")).sendKeys(c_middleName);
 		driver.findElement(By.id("addCandidate_lastName")).sendKeys(c_lastName);
-		driver.findElement(By.id("addCandidate_email")).sendKeys("kpg@sdet.com");
+		driver.findElement(By.id("addCandidate_email")).sendKeys("kpg3@sdet.com");
 		
 		Select select = new Select(driver.findElement(By.id("addCandidate_vacancy")));
 		select.selectByVisibleText(jobVacancy);
@@ -152,12 +169,14 @@ public class Hrm {
 		driver.findElement(By.id("menu_recruitment_viewCandidates")).click();
 		String c_name = c_firstName +" "+ c_middleName +" "+ c_lastName;
 		driver.findElement(By.id("candidateSearch_candidateName")).sendKeys(c_name);
+		Thread.sleep(2000);
 		WebElement vacancy = driver.findElement(By.id("candidateSearch_jobVacancy"));
 		
 		Select select1 = new Select(vacancy);
 		select1.selectByVisibleText(jobVacancy);
-		
+		Thread.sleep(2000);
 		driver.findElement(By.id("btnSrch")).click();
+		Thread.sleep(2000);
 		
 		String candidate = driver.findElement(By.xpath("//table[@id='resultTable']/tbody/tr/td[3]/a")).getText();
 		assertEquals(candidate, c_name);
@@ -178,7 +197,9 @@ public class Hrm {
 
 	@Then("^click Add button to add a new Employee$")
 	public void click_Add_button_to_add_a_new_Employee() throws Throwable {
-	    driver.findElement(By.id("btnAdd")).click();
+		Thread.sleep(2000);
+		driver.findElement(By.id("btnAdd")).click();
+		Thread.sleep(2000);
 	}
 
 
@@ -201,7 +222,7 @@ public class Hrm {
 			wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath("//div[@id='addEmployeeTbl']/form/fieldset/ol/li[5]/input"))).sendKeys(details.get(i+3));
 			driver.findElement(By.xpath("//div[@id='addEmployeeTbl']/form/fieldset/ol/li[6]/input")).sendKeys(details.get(i+4));
 			driver.findElement(By.xpath("//div[@id='addEmployeeTbl']/form/fieldset/ol/li[7]/input")).sendKeys(details.get(i+4));
-
+			
 		    driver.findElement(By.id("btnSave")).click();
 
 		    Thread.sleep(2000);
@@ -218,7 +239,8 @@ public class Hrm {
 		driver.findElement(By.id("menu_pim_viewEmployeeList")).click();
 
 		for(int i=0;i<empId.size();i++) {
-			driver.findElement(By.xpath("//div[@id='employee-information']/div[2]/form/fieldset/ol/li[2]/input")).sendKeys(empId.get(i));
+			Thread.sleep(2000);
+			driver.findElement(By.xpath("//*[@id='empsearch_id']")).sendKeys(empId.get(i));
 			System.out.println(empId.get(i)+" : "+candidate.get(i));
 			driver.findElement(By.xpath("//div[@id='employee-information']/div[2]/form/fieldset/p/input")).click();
 			Thread.sleep(2000);
@@ -236,7 +258,7 @@ public class Hrm {
 	
 	// -------- Add Multiple Employee - End ---------	
 	
-	
+
 	
 	
 	

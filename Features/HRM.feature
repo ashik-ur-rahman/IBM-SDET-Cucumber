@@ -32,10 +32,10 @@ Feature: HRM Activities
 		When PIM option is clicked from the menu
 		Then click Add button to add a new Employee
 		And enter details of employee and save
-				|		V				|	R					| 	Krishna		| krishvr13	| vrkr!$hn@01|
-				|		Ayush		|	Kumar			| 	Gupta			| guptaak13	| @kgupt@01  |
-				|		Lal			|	Chand			| 	Tripathi	| tripathi13| lctr!p@th01|
-				|		R				|	L					| 	Steven		| stevenrl13| rl$t3v3n01 |		
+				|		V				|	R					| 	Krishna		| krishvr24	| vrkr!$hn@01|
+				|		Ayush		|	Kumar			| 	Gupta			| guptaak24	| @kgupt@01  |
+				|		Lal			|	Chand			| 	Tripathi	| tripathi24| lctr!p@th01|
+				|		R				|	L					| 	Steven		| stevenrl24| rl$t3v3n01 |		
 		And verify that the employees have been created
 		And Close the browser
 
@@ -55,8 +55,8 @@ Feature: HRM Activities
     
 Examples:
 		|			Job Title						|Vacancy name	| 	Hiring Manager 	| No of Pos	|	
-		|		Android Developer			|		ANDEV02		| 		V R Krishna		| 		04		|
-		|Automation Test Engineer	|	AUTSTENG02	| Ayush Kumar Gupta	| 		05		|
-		|			Java Developer			|	JAVADEV02		|	Lal Chand tripathi| 		07		|
-		|			DevOps Engineer			|	DEVOPSENG02	| 	R L Steven			| 		02		|
+		|		Android Developer			|		ANDEV09		| 		V R Krishna		| 		04		|
+		|Automation Test Engineer	|	AUTSTENG09	| Ayush Kumar Gupta	| 		05		|
+		|			Java Developer			|	JAVADEV09		|	Lal Chand tripathi| 		07		|
+		|			DevOps Engineer			|	DEVOPSENG09	| 	R L Steven			| 		02		|
 		    
